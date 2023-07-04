@@ -1,5 +1,5 @@
 # Introduction
-A Report Managager App is built using the MVC Architecture.
+A Report Manager App is built using the MVC Architecture. Users can upload and manage reports as well as view reports from other users.
 
 # How It's Made
 
