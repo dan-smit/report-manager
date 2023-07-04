@@ -1,78 +1,106 @@
 const cloudinary = require("../middleware/cloudinary");
-const Post = require("../models/Post");
-const Comment = require("../models/Comment")
+const Report = require("../models/Report");
 
 module.exports = {
-  getProfile: async (req, res) => {
+  getHome: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
-      res.render("profile.ejs", { posts: posts, user: req.user });
+      const reports = await Report.find({ uploader: req.user.id });
+      res.render("home.ejs", { reports: reports, user: req.user });
     } catch (err) {
       console.log(err);
     }
   },
-  getFeed: async (req, res) => {
+  getReports: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      const reports = await Report.find().sort({ createdAt: "desc" }).lean();
+      //const report = await Report.find()
+      res.render("reports.ejs", { reports: reports, user: req.user });  
     } catch (err) {
       console.log(err);
     }
   },
-  getPost: async (req, res) => {
+  viewReport: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
-      const comments = await Comment.find().find({post: req.params.id }).sort({createdAt: "desc" }).lean(); //grabs all comments from mongoDB on the post
-      res.render("post.ejs", { post: post, user: req.user, comments: comments });   //renders posts as well as corresponding comments for that post
+      const report = await Report.findById(req.params.id);
+      console.log(`user id: ${req.user.id} and uploader: ${report.uploader}`)
+      res.render("viewReport.ejs", { report: report, user: req.user });  
     } catch (err) {
       console.log(err);
     }
   },
-  createPost: async (req, res) => {
+  addViewers: async (req, res) => {
     try {
-      // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
-      console.log(result)
-      await Post.create({
-        title: req.body.title,
-        image: result.secure_url,
-        cloudinaryId: result.public_id,
-        caption: req.body.caption,
-        likes: 0,
-        user: req.user.id,
-      });
-      console.log("Post has been added!");
-      res.redirect("/profile");
-    } catch (err) {
-      console.log(err);
-    }
-  },
-  likePost: async (req, res) => {
-    try {
-      await Post.findOneAndUpdate(
+      await Report.findOneAndUpdate(
         { _id: req.params.id }, //finds post that has the id in the URL
         {
-          $inc: { likes: 1 }, //Increment the likes property by 1
+          $push: { viewers: req.body.viewer }, 
         }
       );
-      console.log("Likes +1");
+      console.log("Viewer Added");
       res.redirect(`/post/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }
   },
-  deletePost: async (req, res) => {
+  updateTitle: async (req, res) => {
+    try {
+      await Report.findOneAndUpdate(
+        { _id: req.params.id }, //finds post that has the id in the URL
+        {
+          $set: { title: req.body.title }, 
+        }
+      );
+      console.log("Title Updated");
+      res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  updateDescription: async (req, res) => {
+    try {
+      await Report.findOneAndUpdate(
+        { _id: req.params.id }, //finds post that has the id in the URL
+        {
+          $set: { description: req.body.caption },
+        }
+      );
+      console.log("Description Updated");
+      res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  createReport: async (req, res) => {
+    try {
+      // Upload image to cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path);
+      await Report.create({
+        title: req.body.title,
+        userName: req.user.userName,
+        fileName: req.file.originalname,
+        reportPDF: result.secure_url,
+        cloudinaryId: result.public_id,
+        description: req.body.caption,
+        uploader: req.user.id,
+      });
+      console.log("Report has been added!");
+      res.redirect("/home");
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  deleteReport: async (req, res) => {
     try {
       // Find post by id
-      let post = await Post.findById({ _id: req.params.id });
+      let report = await Report.findById({ _id: req.params.id });
       // Delete image from cloudinary
-      await cloudinary.uploader.destroy(post.cloudinaryId);
+      await cloudinary.uploader.destroy(report.cloudinaryId);
       // Delete post from db
-      await Post.remove({ _id: req.params.id });
-      console.log("Deleted Post");
-      res.redirect("/profile");
+      await Report.remove({ _id: req.params.id });
+      console.log("Deleted Report");
+      res.redirect("/home");
     } catch (err) {
-      res.redirect("/profile");
+      res.redirect("/home");
     }
   },
 };

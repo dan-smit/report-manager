@@ -1,0 +1,62 @@
+<%- include('partials/header') -%>
+<div class="container">
+  <div class="row mt-5">
+      <div class="col-4">
+          <div>
+              <p><strong>User Name</strong>: <%= user.userName %></p>
+              <p><strong>Email</strong>: <%= user.email %></p>
+              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+          </div>
+          <div class="mt-5">
+            <h2>Report Overview</h2>
+            <form action="/post/createReport" enctype="multipart/form-data" method="POST">
+              <div class="mb-3">
+                  <label for="title" class="form-label">Report Title</label>
+                  <input type="text" class="form-control" id="title" name="title">
+              </div>
+              <div class="mb-3">
+                <label for="caption" class="form-label">Description</label>
+                <textarea class="form-control" id="caption" name="caption"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">Report PDF</label>
+                <input type="file" class="form-control" id="imageUpload" name="file">
+              </div>
+              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+            </form>
+          </div>
+      </div>
+      <div class="col-6 container">
+          <!-- add search bar? -->
+        <table class="table table-striped table-bordered">
+          <h3 class="row justify-content-center mt-5">My Reports</h3>
+          <thead>
+            <tr>
+              <th>Uploader</th>
+              <th>Report Title</th>
+              <th>Description</th>
+              <th>PDF Upload</th>
+              <th>Manage Report/Viewers</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(var i=0; i<reports.length; i++) {%>
+            <tr>
+                <td><%= reports[i].userName%></td>
+                <td><%= reports[i].title%></td>
+                <td><%= reports[i].description%></td>
+                <td><%= reports[i].fileName%></td>
+                <td><a class='btn btn-secondary' href="/post/<%= reports[i]._id%>">Manage</a></td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+
+        <div class="row justify-content-center mt-5">
+          <a class="btn btn-primary" href="/reports">View Shared Reports</a>
+        </div>  
+      </div>  
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') -%>

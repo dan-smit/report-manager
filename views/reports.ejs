@@ -1,0 +1,35 @@
+<%- include('partials/header') -%>
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-6">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Uploader</th>
+              <th>Report Title</th>
+              <th>Description</th>
+              <th>PDF Upload</th>
+              <th>Manage/View Reports</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(var i=0; i<reports.length; i++) {%>
+              <%if(reports[i].uploader == user.id || reports[i].viewers.includes(user.userName)){ %> 
+                <tr>
+                    <td><%= reports[i].userName%></td>
+                    <td><%= reports[i].title%></td>
+                    <td><%= reports[i].description%></td>
+                    <td><%= reports[i].fileName%></td>
+                    <td><a class='btn btn-secondary' href="/post/<%= reports[i]._id%>">Manage/View</a></td>
+                </tr>
+              <% } %>
+            <%}%>
+          </tbody>
+        </table>
+    <div class="row justify-content-center mt-5">
+      <a class="btn btn-primary" href="/home">Return to Home</a>
+    </div> 
+    </div>
+   
+  </div>  
+<%- include('partials/footer') -%>
