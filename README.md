@@ -5,32 +5,20 @@ A Report Managager App is built using the MVC Architecture.
 
 **Tech used:** <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="20" height="20"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction#introducing_node" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="20" height="20"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction#introducing_node" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="node.js" width="20" height="20"/> </a>
 
-## Optimizations
-
-I consistently optimize my code by learning and implementing solutions that improve efficiency and readability.
-
-## Lessons Learned
-
-The biggest lesson I have learned is that codewars is a marathon, not a sprint. I will be the best software developer I can be by learning as best as I can, and that is done by taking the initiative to learn and consistently writing code.
-
-
-# Install
+## Install all the dependences or node packages used for development via Terminal
 
 `npm install`
-
----
-
-# Things to add
-
-- Create a `.env` file in config folder and add the following as `key = value`
-  - PORT = 2121 (can be any port example: 3000)
-  - DB_STRING = `your database URI`
-  - CLOUD_NAME = `your cloudinary cloud name`
-  - API_KEY = `your cloudinary api key`
-  - API_SECRET = `your cloudinary api secret`
 
 ---
 
 # Run
 
 `npm start`
+
+## Optimizations
+
+With the addition of time towards improving this web application, I would implement features such as team creation and team collaboration, which would allow this application to be more engaging and more convenient for content accessibility. I'd also explore utilizing other view engines and frameworks such as react and next.js, which would allow me to handle SSR/Hydration and filtered/unfiltered database data in the same view.
+
+## Lessons Learned
+
+Building this application gave me a great understanding of request data and server API code to handle those requests. I feel stronger in my ability to manipulate requests with server side code to 
