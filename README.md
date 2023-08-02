@@ -1,5 +1,5 @@
 # Introduction
-A Report Manager App is built using the MVC Architecture. Users can upload and manage reports as well as view reports from other users.
+The Report Manager App is built using the MVC Architecture. Users can upload and manage reports as well as view reports from other users.
 
 # How It's Made
 
@@ -21,4 +21,4 @@ With the addition of time towards improving this web application, I would implem
 
 ## Lessons Learned
 
-Building this application gave me a great understanding of request data and server API code to handle those requests. I feel stronger in my ability to manipulate requests with server side code to 
+Building this application gave me a great understanding of request data and server API code to handle those requests. I feel stronger in my ability to manipulate requests with server side code to obtain desired functionality.
