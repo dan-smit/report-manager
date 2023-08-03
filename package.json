@@ -2,9 +2,9 @@
   "name": "pdf-manager",
   "version": "1.0.0",
   "description": "Manage report PDFs",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
