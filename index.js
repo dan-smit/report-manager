@@ -62,5 +62,4 @@ app.listen(process.env.PORT, () => {  //Uses env variable for the port for deplo
   console.log("Server is running, you better catch it!");
 });
 
-// Export the Express API
-module.exports = app;
+module.exports(app)
