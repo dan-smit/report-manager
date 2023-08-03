@@ -61,3 +61,6 @@ app.use("/post", postRoutes);
 app.listen(process.env.PORT, () => {  //Uses env variable for the port for deployment/hosting
   console.log("Server is running, you better catch it!");
 });
+
+// Export the Express API
+module.exports = app;
