@@ -40,9 +40,9 @@ app.use(methodOverride("_method"));   //Uses methodOverride package and looks fo
 app.use(
   session({
     secret: "keyboard cat",
-    resave: false,
-    saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    resave: false, //don't save session if unmodified
+    saveUninitialized: false, //don't create session until something stored
+    store: new MongoStore({mongooseConnection: mongoose.connection})
   })
 );
 
